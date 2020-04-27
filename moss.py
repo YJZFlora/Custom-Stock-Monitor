@@ -12,7 +12,7 @@ CLIENT = boto3.resource("dynamodb")
 table = CLIENT.Table("stock-monitor-user")
 buffer = CLIENT.Table("stock-monitor-buffer")
 # server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-# server.login('no.reply.csm678@gmail.com', 'St0ckM0n1t0r')
+# server.login('user-email', 'password')
 
 def do_job():
     scheduler = BlockingScheduler()
@@ -45,9 +45,9 @@ def send_mail(email, stock, price, percent):
     print([stock, percent, price])
     print([type(stock), type(percent), type(price)])
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login('no.reply.csm678@gmail.com', 'St0ckM0n1t0r')
+    server.login('user-email', 'password')
     server.sendmail(
-        "no.reply.csm678@gmail.com",
+        "user-email",
         email,
         'Howdy!\n\nThe price of stock "{}" you subscribed has changed over {}%, which is ${} now.\n\nCSCE678 Customized Stock Monitoring'.format(stock, percent, price)
     )
